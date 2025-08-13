@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Мои бронирования</h2>
+  {% if reservations %}
+    <ul>
+      {% for r in reservations %}
+        <li>
+          {{ r.date }} — {{ r.table }} — {{ r.hour_start }}:00–{{ r.hour_end }}:00
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>У вас нет активных броней.</p>
+  {% endif %}
+{% endblock %}

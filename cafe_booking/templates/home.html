@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Добро пожаловать в систему бронирования столиков</h1>
+  <p>Кафе открыто с <strong>08:00</strong> до <strong>18:00</strong>.</p>
+
+  {% if user.is_authenticated %}
+    <p><a class="btn" href="{% url 'tables_list' %}">Посмотреть столики</a></p>
+  {% else %}
+    <p><a class="btn" href="{% url 'login' %}?next={% url 'tables_list' %}">Посмотреть столики</a></p>
+    <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+  {% endif %}
+{% endblock %}
