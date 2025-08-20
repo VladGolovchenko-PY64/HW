@@ -1,56 +1,59 @@
 from django import forms
+from datetime import date
 from .models import Reservation
-from django.utils import timezone
+
+OPEN_HOUR = 8
+CLOSE_HOUR = 18
 
 class ReservationForm(forms.ModelForm):
+    hour_start = forms.ChoiceField(
+        choices=[(h, f'{h}:00') for h in range(OPEN_HOUR, CLOSE_HOUR)],
+        label="С"
+    )
+    hour_end = forms.ChoiceField(
+        choices=[(h, f'{h}:00') for h in range(OPEN_HOUR + 1, CLOSE_HOUR + 1)],
+        label="По"
+    )
+
     class Meta:
         model = Reservation
         fields = ['table', 'date', 'hour_start', 'hour_end']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }
 
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+    def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
 
-        today = timezone.now().date()
-        self.fields['date'].widget = forms.DateInput(
-            attrs={
-                'type': 'date',
-                'min': today.strftime('%Y-%m-%d')
-            }
-        )
-
     def clean_date(self):
-        date = self.cleaned_data['date']
-        if date < timezone.now().date():
-            raise forms.ValidationError("Нельзя бронировать на прошлую дату!")
-        return date
+        d = self.cleaned_data['date']
+        if d < date.today():
+            raise forms.ValidationError("Нельзя бронировать в прошлом.")
+        return d
 
     def clean(self):
-        cleaned_data = super().clean()
-        table = cleaned_data.get('table')
-        date = cleaned_data.get('date')
-        hour_start = cleaned_data.get('hour_start')
-        hour_end = cleaned_data.get('hour_end')
+        cleaned = super().clean()
+        table = cleaned.get('table')
+        date_ = cleaned.get('date')
+        start = int(cleaned.get('hour_start'))
+        end   = int(cleaned.get('hour_end'))
 
-        if table and date:
+        if start >= end:
+            raise forms.ValidationError("Время окончания должно быть больше времени начала.")
 
-            exists = Reservation.objects.filter(
-                table=table,
-                date=date,
-                hour_start__lt=hour_end,
-                hour_end__gt=hour_start
-            ).exists()
-            if exists:
-                raise forms.ValidationError("Этот столик уже забронирован на это время.")
+        from .models import Reservation
+
+        if Reservation.objects.filter(user=self.user, date=date_).exists():
+            raise forms.ValidationError("У вас уже есть бронь на этот день.")
 
 
-            if self.user:
-                user_bookings_today = Reservation.objects.filter(
-                    user=self.user,
-                    date=date
-                ).count()
-                if user_bookings_today >= 1:
-                    raise forms.ValidationError("Вы уже бронировали столик на этот день.")
-
-        return cleaned_data
+        overlapping = Reservation.objects.filter(
+            table=table,
+            date=date_,
+            hour_start__lt=end,
+            hour_end__gt=start
+        )
+        if overlapping.exists():
+            raise forms.ValidationError("Этот столик уже занят в выбранный интервал.")
+        return cleaned

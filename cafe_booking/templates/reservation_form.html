@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Новая бронь</h2>
-  <p>Кафе работает с <strong>08:00</strong> до <strong>18:00</strong>. Выберите дату и интервал времени.</p>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Забронировать</button>
-  </form>
+<h2>Новая бронь</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Забронировать</button>
+</form>
 {% endblock %}

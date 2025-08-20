@@ -11,23 +11,32 @@ def tables_list(request):
     tables = Table.objects.all()
     if seats_filter:
         try:
-            seats_int = int(seats_filter)
-            tables = tables.filter(seats=seats_int)
+            val = int(seats_filter)
+            low = max(1, val)
+            high = val + 2
+            tables = tables.filter(seats__gte=low, seats__lte=high)
         except ValueError:
             pass
     return render(request, 'tables_list.html', {'tables': tables})
 
 @login_required
 def new_reservation(request):
+    # --- подставляем столик ---
+    table_id = request.GET.get('table_id')
     if request.method == 'POST':
-        form = ReservationForm(request.POST, initial={'user': request.user})
-        if form.is_valid():
-            reservation = form.save(commit=False)
-            reservation.user = request.user
-            reservation.save()
-            return redirect('my_reservations')
+        form = ReservationForm(request.POST, user=request.user)
     else:
-        form = ReservationForm(user=request.user)
+        initial = {'user': request.user}
+        if table_id:
+            initial['table'] = get_object_or_404(Table, id=table_id)
+        form = ReservationForm(user=request.user, initial=initial)
+
+    if request.method == 'POST' and form.is_valid():
+        reservation = form.save(commit=False)
+        reservation.user = request.user
+        reservation.save()
+        return redirect('my_reservations')
+
     return render(request, 'reservation_form.html', {'form': form})
 
 @login_required
