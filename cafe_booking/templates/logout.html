@@ -1,5 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<h2>Вы успешно вышли из системы.</h2>
-<a href="{% url 'home' %}">На главную</a>
+<div class="text-center mt-5">
+    <h2>Выход из аккаунта</h2>
+    <p>Вы уверены, что хотите выйти?</p>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Выйти</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
 {% endblock %}

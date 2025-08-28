@@ -1,5 +1,15 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<h1>Добро пожаловать в систему бронирования столиков!</h1>
-<p>Для начала войдите или зарегистрируйтесь.</p>
+<div class="text-center mt-5">
+    <h1>Добро пожаловать в систему бронирования столиков!</h1>
+    <p class="lead">Вы можете забронировать столик онлайн в нашем кафе.</p>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'tables_list' %}" class="btn btn-primary btn-lg mt-3">Посмотреть столики</a>
+        <a href="{% url 'my_reservations' %}" class="btn btn-success btn-lg mt-3">Мои бронирования</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3">Войти</a>
+        <a href="{% url 'register' %}" class="btn btn-success btn-lg mt-3">Регистрация</a>
+    {% endif %}
+</div>
 {% endblock %}
