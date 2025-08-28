@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2252b949-ddb6-48a9-8109-d7a701ec3d46" name="Changes" comment="1,1">
-      <change afterPath="$PROJECT_DIR$/.idea/HW.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2252b949-ddb6-48a9-8109-d7a701ec3d46" name="Changes" comment="1.2&#10;1.  при бронировании столиков в меню выбора начала бронирования и конца бронирования - начало с 8:00, а конец до 18:00 включительно. (так как в задании стоит ограничение бронирования с 8:00 до 18:00, а я могу выбрать любое время и даже отрицательное, и столик забронируется даже не выдав ошибку)&#10;2.  на странице столиков при нажатии на кнопку забронировать для конкретного столика, при переходе на страницу бронирования сразу выбирался именно этот столик&#10;3.  фильтр по количеству мест на странице столиков теперь работает так, что при вводе например 5 мест в поиске выдавал столики с количеством мест от 5">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/cafe_booking/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/cafe_booking/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/cafe_booking/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/cafe_booking/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cafe_booking/reservations/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/reservations/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/reservations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/reservations/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/reservations/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/reservations/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cafe_booking/reservations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/reservations/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/my_reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/my_reservations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafe_booking/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cafe_booking/templates/reservation_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/reservation_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cafe_booking/templates/tables_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/cafe_booking/templates/tables_list.html" afterDir="false" />
     </list>
@@ -91,11 +96,20 @@
       <option name="project" value="LOCAL" />
       <updated>1755118434578</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1.2&#10;1.  при бронировании столиков в меню выбора начала бронирования и конца бронирования - начало с 8:00, а конец до 18:00 включительно. (так как в задании стоит ограничение бронирования с 8:00 до 18:00, а я могу выбрать любое время и даже отрицательное, и столик забронируется даже не выдав ошибку)&#10;2.  на странице столиков при нажатии на кнопку забронировать для конкретного столика, при переходе на страницу бронирования сразу выбирался именно этот столик&#10;3.  фильтр по количеству мест на странице столиков теперь работает так, что при вводе например 5 мест в поиске выдавал столики с количеством мест от 5">
+      <option name="closed" value="true" />
+      <created>1755723145684</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1755723145684</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1,1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1,1" />
+    <MESSAGE value="1.2&#10;1.  при бронировании столиков в меню выбора начала бронирования и конца бронирования - начало с 8:00, а конец до 18:00 включительно. (так как в задании стоит ограничение бронирования с 8:00 до 18:00, а я могу выбрать любое время и даже отрицательное, и столик забронируется даже не выдав ошибку)&#10;2.  на странице столиков при нажатии на кнопку забронировать для конкретного столика, при переходе на страницу бронирования сразу выбирался именно этот столик&#10;3.  фильтр по количеству мест на странице столиков теперь работает так, что при вводе например 5 мест в поиске выдавал столики с количеством мест от 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.2&#10;1.  при бронировании столиков в меню выбора начала бронирования и конца бронирования - начало с 8:00, а конец до 18:00 включительно. (так как в задании стоит ограничение бронирования с 8:00 до 18:00, а я могу выбрать любое время и даже отрицательное, и столик забронируется даже не выдав ошибку)&#10;2.  на странице столиков при нажатии на кнопку забронировать для конкретного столика, при переходе на страницу бронирования сразу выбирался именно этот столик&#10;3.  фильтр по количеству мест на странице столиков теперь работает так, что при вводе например 5 мест в поиске выдавал столики с количеством мест от 5" />
   </component>
 </project>

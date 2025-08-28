@@ -2,44 +2,27 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Бронирование столиков</title>
-    <style>
-        body { font-family: sans-serif; max-width: 900px; margin: 20px auto; }
-        nav a { margin-right: 12px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
-        th { background: #f7f7f7; }
-        img { max-width: 160px; height: auto; display: block; }
-        .btn { display:inline-block; padding:6px 10px; border:1px solid #555; text-decoration:none; }
-    </style>
+    <title>Система бронирования</title>
 </head>
 <body>
-<nav>
-    <a href="{% url 'home' %}">Главная</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'tables_list' %}">Столики</a>
-    <a href="{% url 'my_reservations' %}">Мои брони</a>
+    <nav>
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'tables_list' %}">Столики</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'my_reservations' %}">Мои брони</a> |
 
-
-    <form action="{% url 'logout' %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn">Выход</button>
-    </form>
-    {% else %}
-    <a href="{% url 'login' %}?next={% url 'tables_list' %}">Столики</a>
-    <a href="{% url 'login' %}">Вход</a>
-    <a href="{% url 'register' %}">Регистрация</a>
-    {% endif %}
-</nav>
-
-<hr>
-{% if messages %}
-<ul>
-    {% for m in messages %}
-    <li>{{ m }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% block content %}{% endblock %}
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none;border:none;padding:0;margin:0;color:blue;cursor:pointer;text-decoration:underline;">
+                    Выйти
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Войти</a> |
+            <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
 </body>
 </html>

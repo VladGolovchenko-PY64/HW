@@ -2,41 +2,38 @@
 {% block content %}
 <h2>Список столиков</h2>
 
-<form method="get" style="margin-bottom: 12px;">
-  <label>Фильтр по количеству мест:</label>
-  <input type="number" name="seats" min="1" value="{{ request.GET.seats }}">
-  <button type="submit">Фильтровать</button>
-  <a href="{% url 'tables_list' %}">Сбросить</a>
+<form method="get">
+    <label>Фильтр по местам:</label>
+    <input type="number" name="seats" value="{{ request.GET.seats }}">
+    <button type="submit">Найти</button>
 </form>
 
-<table>
-  <tr>
-    <th>Фото</th>
-    <th>Номер</th>
-    <th>Мест</th>
-    <th>Действие</th>
-  </tr>
-  {% for table in tables %}
-  <tr>
-    <td>
-      {% if table.image %}
-      <img src="{{ table.image.url }}" alt="Столик {{ table.number }}">
-      {% else %}
-      <em>Фото отсутствует</em>
-      {% endif %}
-    </td>
-    <td>{{ table.number }}</td>
-    <td>{{ table.seats }}</td>
-    <td>
-      {% if user.is_authenticated %}
-      <a class="btn" href="{% url 'new_reservation' %}?table_id={{ table.id }}">Забронировать</a>
-      {% else %}
-      <a class="btn" href="{% url 'login' %}?next={% url 'new_reservation' %}?table_id={{ table.id }}">Войти для брони</a>
-      {% endif %}
-    </td>
-  </tr>
-  {% empty %}
-  <tr><td colspan="4">Столиков нет.</td></tr>
-  {% endfor %}
+<table border="1">
+    <tr>
+        <th>Номер</th>
+        <th>Места</th>
+        <th>Картинка</th>
+        <th>Действие</th>
+    </tr>
+    {% for table in tables %}
+    <tr>
+        <td>{{ table.number }}</td>
+        <td>{{ table.seats }}</td>
+        <td>
+            {% if table.image %}
+                <img src="{{ table.image.url }}" width="100">
+            {% else %}
+                Нет изображения
+            {% endif %}
+        </td>
+        <td>
+            {% if user.is_authenticated %}
+                <a href="{% url 'new_reservation' %}?table_id={{ table.id }}">Забронировать</a>
+            {% else %}
+                <a href="{% url 'login' %}">Войдите, чтобы забронировать</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 {% endblock %}

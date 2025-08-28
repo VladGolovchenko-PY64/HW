@@ -21,12 +21,11 @@ def tables_list(request):
 
 @login_required
 def new_reservation(request):
-    # --- подставляем столик ---
     table_id = request.GET.get('table_id')
     if request.method == 'POST':
         form = ReservationForm(request.POST, user=request.user)
     else:
-        initial = {'user': request.user}
+        initial = {}
         if table_id:
             initial['table'] = get_object_or_404(Table, id=table_id)
         form = ReservationForm(user=request.user, initial=initial)
@@ -43,3 +42,9 @@ def new_reservation(request):
 def my_reservations(request):
     reservations = Reservation.objects.filter(user=request.user).order_by('-date', '-hour_start')
     return render(request, 'my_reservations.html', {'reservations': reservations})
+
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+    reservation.delete()
+    return redirect('my_reservations')

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Мои бронирования</h2>
-  {% if reservations %}
+<h2>Мои бронирования</h2>
+{% if reservations %}
     <ul>
-      {% for r in reservations %}
+    {% for r in reservations %}
         <li>
-          {{ r.date }} — {{ r.table }} — {{ r.hour_start }}:00–{{ r.hour_end }}:00
+            Столик {{ r.table.number }} — {{ r.date }} с {{ r.hour_start }} до {{ r.hour_end }}
+            <a href="{% url 'cancel_reservation' r.id %}">Отменить</a>
         </li>
-      {% endfor %}
+    {% endfor %}
     </ul>
-  {% else %}
+{% else %}
     <p>У вас нет активных броней.</p>
-  {% endif %}
+{% endif %}
 {% endblock %}
